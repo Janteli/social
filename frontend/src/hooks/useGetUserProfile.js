@@ -10,7 +10,7 @@ const useGetUserProfile = (userId) =>{
     useEffect(()=>{
         const fetchUserProfile = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/api/v1/user/${userId}/profile`,{withCredentials:true})
+                const res = await axios.get(`https://social-y2e0.onrender.com/api/v1/user/${userId}/profile`,{withCredentials:true})
 
                 // console.log(res.data);
                 

@@ -114,7 +114,7 @@ const LeftSidebar = () => {
   ];
   const logoutHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/logout", {
+      const res = await axios.get("https://social-y2e0.onrender.com/api/v1/user/logout", {
         withCredentials: true,
       });
 

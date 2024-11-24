@@ -30,7 +30,7 @@ function Signup() {
         try {
             setLoading(true)
             // console.log(input);
-            const res = await axios.post(`http://localhost:8000/api/v1/user/register`, input, {
+            const res = await axios.post(`https://social-y2e0.onrender.com/api/v1/user/register`, input, {
                 headers:{
                     'Content-Type':'application/json'
                 },

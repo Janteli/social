@@ -11,7 +11,7 @@ const useGetAllMessages = () =>{
     useEffect(()=>{
         const fetchAllMessages = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/api/v1/message/all/${selectedUSer?._id}`, {withCredentials:true})
+                const res = await axios.get(`https://social-y2e0.onrender.com/api/v1/message/all/${selectedUSer?._id}`, {withCredentials:true})
 
                 // console.log(res.data);
                 if(res.data.success){

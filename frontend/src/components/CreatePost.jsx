@@ -42,15 +42,15 @@ const CreatePost = ({ open, setOpen }) => {
     if(imagePreview) formData.append("image", file)
     try {
         setLoading(true)
-        const res = await axios.post('http://localhost:8000/api/v1/post/addpost', formData, {
+        const res = await axios.post('https://social-y2e0.onrender.com/api/v1/post/addpost', formData, {
             headers: {
                 'Content-Type': "multipart/form-data"
             },
             withCredentials: true
         });
 
-      console.log('create-outside ',res?.data?.message);
-        console.log('boolean', res?.data?.success);
+      // console.log('create-outside ',res?.data?.message);
+      //   console.log('boolean', res?.data?.success);
         
 
         if(res?.data?.success){
