@@ -1,0 +1,76 @@
+for file handling
+
+#1.cloudinary
+import {v2 as cloudinary } from 'cloudinary';
+import dotenv from 'dotenv';
+dotenv.config({});
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+});
+
+export default cloudinary;
+
+#2.DataUri
+import DataUriParser from 'datauri/parser.js';
+import path from 'path';
+
+const parser = new DataUriParser();
+
+const getDataUri = (file) => {
+    const extName = path.extname(file.originalname).toString();
+    return parser.format(extName, file.buffer).content
+};
+
+export default getDataUri;
+
+#3. multer
+import multer from 'multer';
+
+const upload = multer({
+    storage: multer.memoryStorage()
+});
+
+export default upload;
+
+#5.Sharp
+
+import sharp from "sharp";
+import cloudinary from "../utils/coudinary.js";
+import { Post } from "../models/post.model.js";
+export const addNewPost = async (req, res) =>{
+    try {
+        const { caption } = req.body;
+        const image = req.file;
+        const authorId = req.id;
+
+        if(!image){
+            return res.status(401).json({
+                message: 'Image is required',
+            })
+        }
+
+        // image upload
+        const optimizedImageBuffer = await sharp(image.buffer)
+        .resize({width:800, height:800, fit: 'inside'})
+        .toFormat('jpg', {quality:80})
+        .toBuffer()
+
+        // new method to convert to datauri
+        // buffer to data uri
+        const fileUri = `data:image/jpeg;base64,${optimizedImageBuffer.toString('base64')}`
+
+        const cloudResponse = await cloudinary.uploader.upload(fileUri);
+
+        const post = await Post.create({
+            caption,
+
+        })
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}

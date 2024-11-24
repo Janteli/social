@@ -1,0 +1,12 @@
+@screen sm {
+    .sidebar {
+      display: none;
+    }
+  }
+  
+  @screen md {
+    .sidebar {
+      display: block;
+    }
+  }
+  
